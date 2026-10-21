@@ -1,4 +1,4 @@
-# ClassicPitch: ISMIR 2026
+# ISMIR 2026: ClassicPitch
 
 This repository contains the code for the paper:
 
