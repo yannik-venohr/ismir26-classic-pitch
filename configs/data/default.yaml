@@ -1,0 +1,43 @@
+splits_file: ./configs/data/ismir2026_splits.csv
+feature_dir: ./features # precomputed HCQTs and annotations, one subfolder per feature config
+node_cache_dir: null # optional fast local disk (e.g. /tmp on a compute node) to copy the features to before training
+
+# Annotation parameters
+annotations:
+  min_note: 24 # C1
+  out_bins: 72 # 6 octaves
+
+# HCQT parameters
+hcqt:
+  sr: 22050
+  hop_length: 512
+  bins_per_octave: 36 # 3 bins per semitone
+  n_octaves: 6
+  n_bins: 216
+  min_note: ${data.annotations.min_note}
+  harmonics: [0.5, 1, 2, 3, 4, 5]
+
+# Track selection, using the boolean columns of the splits file.
+# A track is used for training if it is in any of `train` and none of `train_omit`.
+dataset:
+  accept_overlap: False # allow the same track in several splits
+  splits:
+    train:
+      - train
+      - musicnet
+    train_omit:
+      - low_ap # tracks with poor annotation quality
+      - maestro_test
+    val:
+      - val
+    test:
+      - test
+  context_size: 100 # frames per training patch
+  hop_size: 100 # frames between patch starts
+  load_onsets: True
+  load_frames: True
+
+dataloader:
+  batch_size: 128
+  num_workers: 4
+  persistent_workers: True

@@ -1,0 +1,6 @@
+defaults:
+  - default
+name: basic_pitch
+
+assembly_method: basic_pitch
+log_compress_input: True

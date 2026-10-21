@@ -1,0 +1,10 @@
+# @package _global_
+# CP-Lo in the paper: CP trained with the onset loss only, Table 5 (Section 5.5)
+experiment_name: CP-onset_loss
+
+defaults:
+  - override /training: onsets_only
+
+data:
+  dataset:
+    load_frames: False

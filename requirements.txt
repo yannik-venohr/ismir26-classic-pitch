@@ -1,0 +1,24 @@
+# Python 3.10
+#
+# Install with:
+#   pip install -r requirements.txt
+numpy==1.26.4
+scipy==1.15.0
+pandas==1.5.3
+torch==2.8.0
+lightning==2.5.5
+hydra-core==1.3.2
+omegaconf==2.3.0
+librosa==0.11.0
+pretty_midi==0.2.11
+mir_eval==0.8.2
+scikit-learn==1.7.2
+tqdm==4.67.1
+
+# notebook (ismir2026.ipynb)
+matplotlib==3.10.0
+seaborn==0.13.2
+ipykernel==6.30.1
+
+# optional, for logging.logger=[csv,wandb]
+# wandb==0.22.3

@@ -1,0 +1,10 @@
+# @package _global_
+# CP-Lf in the paper: CP trained with the frame loss only, Table 4
+experiment_name: CP-frame_loss
+
+defaults:
+  - override /training: frames_only
+
+data:
+  dataset:
+    load_onsets: False

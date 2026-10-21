@@ -1,0 +1,11 @@
+# @package _global_
+# CP with all test sets included in the training data, Table 5 (Section 5.4)
+experiment_name: R1-Overfit
+
+data:
+  dataset:
+    accept_overlap: True
+    splits:
+      train:
+        - test
+        - train

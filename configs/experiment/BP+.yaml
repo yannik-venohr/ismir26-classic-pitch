@@ -1,0 +1,6 @@
+# @package _global_
+# Basic Pitch architecture trained with the data and loss of CP, Table 5
+experiment_name: BP+
+
+defaults:
+  - override /model: basic_pitch

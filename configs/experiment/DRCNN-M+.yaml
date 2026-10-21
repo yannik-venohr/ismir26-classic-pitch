@@ -1,0 +1,11 @@
+# @package _global_
+# DRCNN re-implementation trained with the data of CP (frame loss only), Table 4
+experiment_name: DRCNN-M+
+
+defaults:
+  - override /training: frames_only
+  - override /model: drcnn_medium
+
+data:
+  dataset:
+    load_onsets: False

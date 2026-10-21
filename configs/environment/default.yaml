@@ -1,0 +1,67 @@
+# @package _global_
+# Machine-specific paths. Copy this file (e.g. to configs/environment/mine.yaml),
+# fill in the datasets you have, and run with `environment=mine`.
+# Tracks of datasets without an entry here are skipped.
+data:
+  dataset_dirs:
+    bpsd:
+      audio_dir: /path/to/Beethoven_Piano_Sonata_Dataset/audio_wav
+      annot_dir: /path/to/Beethoven_Piano_Sonata_Dataset/ann_audio_note
+    bsqd:
+      audio_dir: /path/to/Beethoven_StringQuartets/audio_wav_22050_mono
+      annot_dir: /path/to/Beethoven_StringQuartets/ann_audio_pitch_csv
+    swd:
+      audio_dir: /path/to/Schubert_Winterreise_Dataset/01_RawData/audio_wav
+      annot_dir: /path/to/Schubert_Winterreise_Dataset/02_Annotations/ann_audio_note
+    maestro:
+      audio_dir: /path/to/maestro-v3.0.0
+      annot_dir: /path/to/maestro-v3.0.0
+    youChorale:
+      audio_dir: /path/to/YouChorale/audio
+      annot_dir: /path/to/YouChorale/midi
+    gaps:
+      audio_dir: /path/to/gaps/audio
+      annot_dir: /path/to/gaps/midi
+    musicnet:
+      audio_dir: /path/to/MusicNet/audio
+      annot_dir: /path/to/MusicNet/labels
+    krauseOrchestral:
+      audio_dir: /path/to/KrauseMutopia/01_RawData/audio_wav
+      annot_dir: /path/to/KrauseMutopia/02_Annotations/ann_audio_note_csv
+    wrd:
+      audio_dir: /path/to/KrauseMutopia/01_RawData/audio_wav
+      annot_dir: /path/to/KrauseMutopia/02_Annotations/ann_audio_note_csv
+    urmp:
+      audio_dir: /path/to/URMP/Dataset
+      annot_dir: /path/to/URMP/csv_annotations
+    dagstuhlChoirSet:
+      audio_dir: /path/to/DagstuhlChoirSet/preprocessed
+      annot_dir: /path/to/DagstuhlChoirSet/preprocessed
+    choraleBricks20:
+      audio_dir: /path/to/ChoraleBricks20Mixes
+      annot_dir: /path/to/ChoraleBricks20Mixes
+    # test datasets
+    trios:
+      audio_dir: /path/to/Trios
+      annot_dir: /path/to/Trios
+    phoenixAnechoic:
+      audio_dir: /path/to/PHENICX-Anechoic/mixaudio_wav_22050_mono
+      annot_dir: /path/to/PHENICX-Anechoic/annotations_combined
+    csd:
+      audio_dir: /path/to/ChoralSingingDataset
+      annot_dir: /path/to/ChoralSingingDataset
+    bach10:
+      audio_dir: /path/to/Bach10
+      annot_dir: /path/to/Bach10/ann_audio_pitch_CSV
+    guitarSet:
+      audio_dir: /path/to/GuitarSet/wav_mix_22050_mono
+      annot_dir: /path/to/GuitarSet/annotations_csv
+    rwc2:
+      audio_dir: /path/to/rwc/audio
+      annot_dir: /path/to/rwc/midi
+    rubato:
+      audio_dir: /path/to/rubato/01_RawData/wav_22050_mono
+      annot_dir: /path/to/rubato/02_Annotations/ann_audio_noteEvents
+
+output_dir: ./outputs
+device: cuda

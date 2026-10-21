@@ -1,0 +1,13 @@
+defaults:
+  - default
+name: drcnn_medium
+
+assembly_method: just-mpe
+log_compress_input: True
+mpe_encoder:
+  type: MPE
+  n_chan_input: ${model.n_chan_input}
+  n_chan_layers: [40, 40, 30, 10]
+  n_prefilt_layers: 5
+  a_lrelu: 0.3
+  p_dropout: 0.2

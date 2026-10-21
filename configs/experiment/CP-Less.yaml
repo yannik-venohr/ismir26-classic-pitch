@@ -1,0 +1,9 @@
+# @package _global_
+# CP trained on a 25% subset of the training data, Table 5 (Section 5.3)
+experiment_name: CP-Less
+
+data:
+  dataset:
+    splits:
+      train:
+        - train25

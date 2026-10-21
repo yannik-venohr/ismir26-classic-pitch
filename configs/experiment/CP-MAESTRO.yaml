@@ -1,0 +1,18 @@
+# @package _global_
+# CP trained and tested on the MAESTRO v3 splits, F50_On 94.3% (Section 5.3)
+# Note: uses an onset tolerance of 1 frame instead of 2
+experiment_name: CP-MAESTRO
+
+training:
+  loss:
+    onset_tolerance_frames: 1
+
+data:
+  dataset:
+    splits:
+      train:
+        - maestro_train
+      val:
+        - maestro_val
+      test:
+        - maestro_test

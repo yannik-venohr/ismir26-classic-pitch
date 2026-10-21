@@ -1,0 +1,8 @@
+# @package _global_
+# Onset loss without shift tolerance and positive weighting, Table 5 (Section 5.5)
+experiment_name: L1-BCE
+
+training:
+  loss:
+    onset_tolerance_frames: 0
+    onset_positive_weight: 1

@@ -1,0 +1,14 @@
+n_chan_input: 6 # number of HCQT harmonics
+n_bins_in: ${data.hcqt.n_bins}
+n_bins_out: ${data.annotations.out_bins}
+
+mpe_encoder: null
+onset_post: null
+
+decoding:
+  frame_threshold: 0.4
+  onset_threshold: 0.4
+  min_frames: 2
+  frames_below_threshold: 5
+
+predict_max_frames: 500 # chunk length for full-track prediction

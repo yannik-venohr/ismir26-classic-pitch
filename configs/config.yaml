@@ -1,0 +1,34 @@
+defaults:
+  - _self_
+  - data: default
+  - model: classic_pitch_large
+  - training: default
+  - environment: default
+  - experiment: CP-L
+
+seed: 42
+run_name: ${experiment_name}_${seed}
+run_dir: ${output_dir}/${run_name}
+
+train: from_scratch # from_scratch, resume (continue from run_dir/last.ckpt) or False (eval only)
+eval: True
+checkpoint_eval: null # checkpoint to evaluate when train=False; null uses run_dir/best_model.ckpt
+
+recompute_features: False # recompute the precomputed HCQTs and annotations
+predictions_dir: ${run_dir}/predictions
+save_frame_predictions: False # also save frame-wise note and onset activations as .npy
+
+logging:
+  logger:
+    - csv
+    # - wandb
+  project: ISMIR2026
+  name: ${run_name}
+  notes: ""
+
+hydra:
+  run:
+    dir: ${run_dir}/hydra
+  sweep:
+    dir: ${run_dir}/hydra
+    subdir: .

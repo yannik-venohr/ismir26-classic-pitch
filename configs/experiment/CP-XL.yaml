@@ -1,0 +1,10 @@
+# @package _global_
+# ClassicPitch XL (3M parameters), Table 1 and Table 5
+experiment_name: CP-XL
+
+defaults:
+  - override /model: classic_pitch_extra_large
+
+data:
+  dataloader:
+    batch_size: 64

@@ -1,0 +1,23 @@
+defaults:
+    - default
+name: classic_pitch_medium
+
+assembly_method: "classic_pitch"
+log_compress_input: True
+mpe_encoder:
+    type: 'HCQTEncoder'
+    in_bins: ${model.n_bins_in}
+    in_channels: ${model.n_chan_input}
+    widths: [20, 80]
+    depths: [2, 8]
+    k_f: [7, 7]
+    k_t: [7, 7]
+    drop_path_rate: 0.2
+onset_post:
+    type: 'OnsetModule'
+    in_channels: 80
+    width: 60
+    depth: 2
+    k_f: 7
+    k_t: 7
+    drop_path_rate: 0.2

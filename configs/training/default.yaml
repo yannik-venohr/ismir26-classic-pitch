@@ -1,0 +1,14 @@
+loss:
+  type: combined # note, onset or combined
+  label_smoothing: 0
+  onset_tolerance_frames: 2
+  onset_positive_weight: 20
+
+learning_rate:
+  scheduler: cosine_annealing_with_warmup # or null for a constant rate
+  initial_rate: 0.001
+
+max_steps: 60000
+gradient_clip_val: 3
+precision: bf16-mixed
+filename: best_model

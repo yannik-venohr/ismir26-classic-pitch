@@ -1,0 +1,9 @@
+# @package _global_
+# CP trained on MusicNet only, Table 5 (Section 5.3)
+experiment_name: CP-MusicNet
+
+data:
+  dataset:
+    splits:
+      train:
+        - musicnet

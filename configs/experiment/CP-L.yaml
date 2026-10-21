@@ -1,0 +1,8 @@
+# @package _global_
+# ClassicPitch L (1M parameters), the default model "CP" of the paper (Tables 4 and 5)
+experiment_name: CP-L
+
+defaults:
+  - override /model: classic_pitch_large
+
+save_frame_predictions: True

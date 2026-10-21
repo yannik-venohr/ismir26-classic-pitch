@@ -1,0 +1,13 @@
+# @package _global_
+# CP (trained on the data of Table 3) evaluated on the MAESTRO v3 test set, F50_On 92.3% (Section 5.3)
+# Run with checkpoint_eval=/path/to/CP-L/best_model.ckpt
+experiment_name: CP-eval-MAESTRO
+
+train: False
+checkpoint_eval: ???
+
+data:
+  dataset:
+    splits:
+      test:
+        - maestro_test
