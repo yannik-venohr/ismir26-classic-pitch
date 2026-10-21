@@ -12,10 +12,6 @@ If you have any questions, feel free to reach out to me: `yannik.venohr@uni-wuer
 
 [`ismir2026.ipynb`](ismir2026.ipynb) reproduces the tables and figures of the paper from the track-wise evaluation results of our runs in [`results/`](results/).
 
-- `AMT_<tol>_*`: note-level [mir_eval](https://github.com/mir-evaluation/mir_eval) measures of the decoded notes, with onset tolerances of 50, 100 and 200 ms (`*_no_offset` ignores offsets)
-- `AMT_FRAME_*`: frame-level measures of the decoded notes
-- `MPE_*`: frame-level measures of the raw note activations (only for models with multi-pitch estimation outputs)
-
 ## Experiments
 
 All experiments of the paper are in [`configs/experiment/`](configs/experiment/):
