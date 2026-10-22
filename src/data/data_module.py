@@ -33,7 +33,7 @@ class PitchDataModule(L.LightningDataModule):
     """
     Lightning DataModule for the automatic music transcription task.
     All datasets are converted into a homogeneous format once: for every track, a directory
-    with hcqt.npy, y_note.npy, y_onset.npy and note_events.npy is saved to the feature dir.
+    with hcqt.npy, y_frame.npy, y_onset.npy and note_events.npy is saved to the feature dir.
     Which tracks belong to which split is defined by the boolean columns of the splits file.
     Args:
         data_params: OmegaConf object containing the data parameters (see configs/data/default.yaml)
@@ -137,7 +137,7 @@ class PitchDataModule(L.LightningDataModule):
         hcqt, times, _ = audio_to_hcqt(x, sr_audio, self.data_params.hcqt)
 
         note_events = load_note_events(id, dataset, dirs.annot_dir)
-        notes_array = note_events_to_binary_mpe_array(note_events, times, annotations.min_note, annotations.out_bins)
+        frames_array = note_events_to_binary_mpe_array(note_events, times, annotations.min_note, annotations.out_bins)
         onsets_array = note_events_to_onset_array(note_events, times, annotations.min_note, annotations.out_bins)
 
         # write to a temporary dir first, so an interrupted run leaves no half-written track
@@ -145,7 +145,7 @@ class PitchDataModule(L.LightningDataModule):
         tmp_dir = track_dir.with_name(track_dir.name + '.tmp')
         tmp_dir.mkdir(parents=True, exist_ok=True)
         np.save(tmp_dir / 'hcqt.npy', hcqt.astype(np.float32))
-        np.save(tmp_dir / 'y_note.npy', notes_array.astype(np.float32))
+        np.save(tmp_dir / 'y_frame.npy', frames_array.astype(np.float32))
         np.save(tmp_dir / 'y_onset.npy', onsets_array.astype(np.float32))
         np.save(tmp_dir / 'note_events.npy', note_events)
         tmp_dir.rename(track_dir)

@@ -57,6 +57,6 @@ class BasicPitch(nn.Module):
         x_onset = self.conv_onset_post(x_onset_pre)
 
         # squeeze channel dim: (B, 1, T, F) -> (B, T, F) -> (B, F, T)
-        outputs = {"onset": x_onset.squeeze(1).permute(0, 2, 1), "note": x_note.squeeze(1).permute(0, 2, 1)}
+        outputs = {"onset": x_onset.squeeze(1).permute(0, 2, 1), "frame": x_note.squeeze(1).permute(0, 2, 1)}
 
         return outputs

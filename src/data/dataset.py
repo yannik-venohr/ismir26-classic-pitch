@@ -63,7 +63,7 @@ class PitchDataset(Dataset):
         X = torch.from_numpy(np.load(base / 'hcqt.npy', mmap_mode='r')[:, :, s:e].copy())
         y = {}
         if self.load_frames:
-            y['note'] = torch.from_numpy(np.load(base / 'y_note.npy', mmap_mode='r')[:, s:e].copy())
+            y['frame'] = torch.from_numpy(np.load(base / 'y_frame.npy', mmap_mode='r')[:, s:e].copy())
         if self.load_onsets:
             y['onset'] = torch.from_numpy(np.load(base / 'y_onset.npy', mmap_mode='r')[:, s:e].copy())
         return {'X': X, 'y': y}

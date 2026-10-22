@@ -13,7 +13,7 @@ class Assembler(nn.Module):
         just-mpe:      a single multi-pitch model (DRCNN), its output is used for frames and onsets
         basic_pitch:   the Basic Pitch baseline
     Input:  HCQT (B, C, F, T)
-    Output: dict with 'note' and 'onset' logits (B, 72, T)
+    Output: dict with 'frame' and 'onset' logits (B, 72, T)
     """
     def __init__(self, model_params: dict) -> None:
         super().__init__()
@@ -51,6 +51,6 @@ class Assembler(nn.Module):
             x_onset = self.onset_post(features)              # (B, 1, F, T)
 
         return {
-            "note": x_note.squeeze(1),   # (B, F, T)
+            "frame": x_note.squeeze(1),   # (B, F, T)
             "onset": x_onset.squeeze(1), # (B, F, T)
         }

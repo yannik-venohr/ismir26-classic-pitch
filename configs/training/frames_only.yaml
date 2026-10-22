@@ -2,4 +2,4 @@ defaults:
   - default
 
 loss:
-  type: note
+  type: frame

@@ -4,7 +4,7 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR, SequentialLR, LinearLR
 
 from src.model.assembler import Assembler
-from src.loss import note_loss, onset_loss_with_tolerance
+from src.loss import frame_loss, onset_loss_with_tolerance
 
 
 def compute_frame_metrics(y_pred_logits, y_true, threshold=0.4):
@@ -48,11 +48,11 @@ class ClassicPitchLightning(LightningModule):
 
     def loss(self, y_pred, y_true):
         zero = torch.tensor(0.0, device=self.device)
-        note_l, onset_l = zero, zero
-        if self.loss_config.type in ["note", "combined"]:
-            note_l = note_loss(
-                y_true=y_true["note"],
-                y_pred_logits=y_pred["note"],
+        frame_l, onset_l = zero, zero
+        if self.loss_config.type in ["frame", "combined"]:
+            frame_l = frame_loss(
+                y_true=y_true["frame"],
+                y_pred_logits=y_pred["frame"],
                 label_smoothing=self.loss_config.label_smoothing,
             )
         if self.loss_config.type in ["onset", "combined"]:
@@ -64,9 +64,9 @@ class ClassicPitchLightning(LightningModule):
                 tolerance_frames=self.loss_config.onset_tolerance_frames,
             )
         return {
-            "note_loss": note_l,
+            "frame_loss": frame_l,
             "onset_loss": onset_l,
-            "total_loss": note_l + onset_l,
+            "total_loss": frame_l + onset_l,
         }
 
     def training_step(self, batch, batch_idx):
@@ -83,7 +83,7 @@ class ClassicPitchLightning(LightningModule):
             self.log(f"val/{k}", v, prog_bar=True)
 
         # frame-wise metrics on the patches as a cheap proxy for the test evaluation
-        for key in ["note", "onset"]:
+        for key in ["frame", "onset"]:
             if key in batch["y"]:
                 metrics = compute_frame_metrics(y_pred_logits=outputs[key], y_true=batch["y"][key])
                 self.log(f"val/{key}_precision", metrics["precision"], on_epoch=True)
@@ -128,7 +128,7 @@ class ClassicPitchLightning(LightningModule):
         Args:
             hcqt: HCQT of shape (C, F, T)
         Returns:
-            dict with 'note' and 'onset' activations in [0, 1], each of shape (72, T)
+            dict with 'frame' and 'onset' activations in [0, 1], each of shape (72, T)
         """
         hcqt = torch.as_tensor(hcqt, dtype=torch.float32, device=self.device)
 

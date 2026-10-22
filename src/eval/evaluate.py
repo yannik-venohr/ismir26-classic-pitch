@@ -16,21 +16,21 @@ def evaluate_note_events(args):
     Note-level measures (AMT_*) and frame-level measures (AMT_FRAME_*) of predicted note events for one track.
     Args (one tuple, so it can be used with Pool.imap):
         predicted_note_events: list of (start, end, pitch, ...)
-        track_dir: feature directory of the track with note_events.npy and y_note.npy
+        track_dir: feature directory of the track with note_events.npy and y_frame.npy
         hcqt_cfg: HCQT parameters (frame times)
         min_note: MIDI pitch of the lowest pitch bin
     """
     predicted_note_events, track_dir, hcqt_cfg, min_note = args
     note_events_gt = np.load(track_dir / 'note_events.npy')
-    y_note = np.load(track_dir / 'y_note.npy')
-    times = get_hcqt_times(hcqt_cfg, y_note.shape[1])
+    y_frame = np.load(track_dir / 'y_frame.npy')
+    times = get_hcqt_times(hcqt_cfg, y_frame.shape[1])
 
     measures = {}
     note_level = eval_note_level(note_events_gt, predicted_note_events)
     measures.update({f'AMT_{k}': v for k, v in note_level.items()})
 
-    y_pred = note_events_to_binary_mpe_array(predicted_note_events, times, min_note=min_note, n_pitch_bins=y_note.shape[0])
-    frame_level = eval_frame_level(y_note, y_pred)
+    y_pred = note_events_to_binary_mpe_array(predicted_note_events, times, min_note=min_note, n_pitch_bins=y_frame.shape[0])
+    frame_level = eval_frame_level(y_frame, y_pred)
     measures.update({f'AMT_FRAME_{k}': v for k, v in frame_level.items()})
     return measures
 
@@ -65,11 +65,11 @@ def evaluate_test_set(cfg, model, datamodule):
             continue
 
         hcqt = np.load(track_dir / 'hcqt.npy')
-        prediction = model.predict_full_track(hcqt, max_frames=cfg.model.predict_max_frames)  # {'note': , 'onset': }
+        prediction = model.predict_full_track(hcqt, max_frames=cfg.model.predict_max_frames)  # {'frame': , 'onset': }
         times = get_hcqt_times(hcqt_cfg, hcqt.shape[2])
 
-        y_note = np.load(track_dir / 'y_note.npy')
-        frame_level = eval_frame_level(y_note, prediction['note'], cfg.model.decoding.frame_threshold)
+        y_frame = np.load(track_dir / 'y_frame.npy')
+        frame_level = eval_frame_level(y_frame, prediction['frame'], cfg.model.decoding.frame_threshold)
         all_measures[test_id] = {f'MPE_{k}': v for k, v in frame_level.items()}
 
         predicted_note_events = output_to_note_events(prediction, times, **cfg.model.decoding)
@@ -79,7 +79,7 @@ def evaluate_test_set(cfg, model, datamodule):
 
         note_events_to_midi(predicted_note_events).write(str(predictions_dir / f'{test_id}.mid'))
         if cfg.save_frame_predictions:
-            np.save(predictions_dir / f'{test_id}.npy', prediction['note'])
+            np.save(predictions_dir / f'{test_id}.npy', prediction['frame'])
             np.save(predictions_dir / f'{test_id}_onset.npy', prediction['onset'])
 
     with Pool(processes=min(10, os.cpu_count())) as pool:

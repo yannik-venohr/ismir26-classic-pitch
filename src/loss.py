@@ -60,7 +60,7 @@ def onset_loss_with_tolerance(
     return loss.mean()
 
 
-def note_loss(
+def frame_loss(
     y_true: torch.Tensor,
     y_pred_logits: torch.Tensor,
     label_smoothing: float = 0.0,

@@ -1,5 +1,5 @@
 loss:
-  type: combined # note, onset or combined
+  type: combined # frame, onset or combined
   label_smoothing: 0
   onset_tolerance_frames: 2
   onset_positive_weight: 20
