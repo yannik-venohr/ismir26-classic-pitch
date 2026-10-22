@@ -112,8 +112,9 @@ Parts of the code are adapted from, or inspired by:
 
 - [ashleve/lightning-hydra-template](https://github.com/ashleve/lightning-hydra-template): project structure with Lightning and Hydra
 - [christofw/multipitch_architectures](https://github.com/christofw/multipitch_architectures): DRCNN baseline (`src/model/mpe.py`)
-- [gudgud96/basic-pitch-torch](https://github.com/gudgud96/basic-pitch-torch): Basic Pitch baseline (`src/model/basic_pitch.py`)
+- [gudgud96/basic-pitch-torch](https://github.com/gudgud96/basic-pitch-torch): Basic Pitch baseline implementation(`src/model/basic_pitch.py`)
 - [geoffroypeeters/deeplearning-101-audiomir_notebook](https://github.com/geoffroypeeters/deeplearning-101-audiomir_notebook): ConvNeXt building blocks (`src/model/building_blocks.py`)
+- [spotify/basic-pitch](https://github.com/spotify/basic-pitch) (Apache-2.0): The onset-peak and decoding logic (`src/postprocess/postprocess.py`) is adapted from them and the `predict()` interface is also modeled after theirs.
 
 
 ## License
